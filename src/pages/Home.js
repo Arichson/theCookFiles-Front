@@ -102,14 +102,15 @@ export default function Home(props) {
 			<div className="recipeContainer">
 				{testing.results.map((recipe, index) => {
 					return (
-						<Link
-							to={'/' + recipe.id}
-							className="eachRecipe"
-							style={{ backgroundImage: `url(${recipe.image})` }}
-							key={index}
-						>
-							<p className="recipeName">{recipe.title}</p>
-						</Link>
+						<li className="eachRecipe">
+							<Link
+								to={'/' + recipe.id}
+								className="recipeLink"
+								style={{ backgroundImage: `url(${recipe.image})` }}
+								>
+								<p className="recipeName">{recipe.title}</p>
+							</Link>
+						</li>
 					);
 				})}
 			</div>
