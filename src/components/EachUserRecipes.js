@@ -1,0 +1,69 @@
+
+import { useEffect, useState } from "react"
+import {Link} from "react-router-dom"
+
+
+export default function EachUserRecipes ({recipe, userInfo, setSavedRecipes}) {
+    const [theRecipe, setTheRecipe] = useState(recipe)
+    const [theUsersData, setTheUsersData] = useState(userInfo)
+
+    const deleteARecipe = async (e, theID) => {
+        e.preventDefault();
+
+        let newRecipeList = []
+        theUsersData.recipes.forEach((recipe) =>{
+            if(recipe._id === theID){
+                console.log("skipped " + theID)
+            } else {
+                newRecipeList.push(recipe)
+            }
+        })
+        // newRecipeList[0] ? newRecipeList = newRecipeList : newRecipeList = []
+        console.log(newRecipeList)
+        const editedUserData = {...theUsersData, recipes: newRecipeList}
+        console.log(editedUserData)
+        try{
+            const res = await fetch(`http://localhost:8000/users/${theUsersData._id}`,
+                {
+                    method: "PUT",
+                    headers: {
+                    "Content-Type": "application/json",
+                    "Authorization" : "Bearer " + window.localStorage.getItem("token")
+                    },
+                    body: JSON.stringify(editedUserData) ///// fix this 
+                  
+                }
+            );
+            const editedData = res.json();
+            console.log(editedData)
+            setTheRecipe(newRecipeList)
+            setTheUsersData(editedUserData)
+            setSavedRecipes(newRecipeList)
+            console.log(theUsersData)
+            
+        } catch (err){
+            console.error(err)
+        }
+    }
+
+    useEffect(() => {
+        setTheRecipe(recipe)
+        setTheUsersData(userInfo)
+    }, [recipe])
+    return(
+        <li className="eachRecipe">
+
+                <Link
+                    to={'/' + theRecipe.id}
+                    className="theRecipeLink"
+                    style={{ backgroundImage: `url(${theRecipe.image})` }}
+                    >
+                    <p className="recipeName">{theRecipe.title}</p>
+                </Link>
+
+            
+                <button onClick={(e) => {deleteARecipe(e, recipe._id)}} >Delete</button>
+          
+        </li>
+    )
+}

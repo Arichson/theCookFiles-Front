@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import {Datacontext} from "../App"
 
 export default function Login(props) {
-	const {isLoggedIn, setIsLoggedIn, token, setToken} = useContext(Datacontext)
+	const {isLoggedIn, setIsLoggedIn} = useContext(Datacontext)
 	const [showPW, setShowPW] = useState(false);
 	const [loginForm, setLoginForm] = useState({
 	  username: "",
@@ -21,10 +21,12 @@ export default function Login(props) {
 			body: JSON.stringify({ ...loginForm })
 			});
 			const data = await response.json();
+			console.log(data)
 			
 			if (data.token) {
 			window.localStorage.setItem("token", data.token);
 			window.localStorage.setItem("username", data.username);
+			window.localStorage.setItem("id", data.id)
 			setIsLoggedIn(true);
 			console.log(window.localStorage)
 			}
@@ -38,29 +40,6 @@ export default function Login(props) {
 		setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
 		console.log(loginForm)
 	};
-
-	const getUserData = async () => {
-		try {
-			const response = await fetch(
-			`http://localhost:8000/users/${window.localStorage.getItem(
-				"username"
-			)}`,
-			{
-				method: "GET",
-				headers: {
-				"Content-Type": "application/json",
-				Authorization: "Bearer " + localStorage.getItem("token")
-				}
-			}
-			);
-			const data = await response.json();
-			// setTheUserName(window.localStorage.getItem("username"))
-			// setUserData(data)
-			console.log(window.localStorage)
-		} catch(err) {
-			console.log(err)
-		}
-	}
 
 
 	return (

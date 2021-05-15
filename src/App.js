@@ -8,7 +8,8 @@ import Home from './pages/Home';
 import Contact from './pages/Contact';
 import UsersPage from './pages/UsersPage';
 import Login from './pages/Login';
-import React, {useState} from "react"
+
+import React, {useState, useEffect} from "react"
 export const Datacontext = React.createContext();
 
 // Save the Component, key and path in an array of objects for each Route
@@ -45,18 +46,21 @@ const routes = [
 	}
 ];
 
+
 export default function App () {
 	const [isLoggedIn, setIsLoggedIn] = useState(false)
-	const [token, setToken] = useState("")
+
+	useEffect(() => {
+		const token = localStorage.getItem("token");
+		if (token) {
+		  setIsLoggedIn(true);
+		}
+	  }, []);
 	return (
-		<Datacontext.Provider value={{isLoggedIn, setIsLoggedIn, token, setToken}}>
+		<Datacontext.Provider value={{isLoggedIn, setIsLoggedIn}}>
 
 			<Router>
 				<NavBar routes={routes} />
-				<Link to="/test"> Test Anchor</Link>
-				<button onClick={() => console.log('hello' + process.env.REACT_APP_TEST)}>
-					Testtest
-				</button>
 				<Switch>
 					{routes.map(({ Component, key, path }) => (
 						<Route

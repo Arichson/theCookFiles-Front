@@ -1,9 +1,9 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext} from 'react';
 import { Link } from 'react-router-dom';
 import {Datacontext} from "../App"
 
 const NavBar = props => {
-	const {isLoggedIn, setIsLoggedIn, token, setToken} = useContext(Datacontext)
+	const {isLoggedIn, setIsLoggedIn} = useContext(Datacontext)
 	console.log(isLoggedIn)
 
 	const handleLogout = () => {

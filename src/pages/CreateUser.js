@@ -7,7 +7,12 @@ export default function CreateUser(props) {
 	const [userInfo, setUserInfo] = useState(
 		{
 			username: "",
-			password: ""
+			password: "",
+			bio: "empty",
+			firstName: "empty",
+			lastName: "empty",
+			birthday: "empty",
+			recipes: []
 		}
 	)
 
@@ -15,7 +20,12 @@ export default function CreateUser(props) {
         e.preventDefault();
 		setUserInfo({
 			username: username,
-    		password: password
+    		password: password,
+			bio: "empty",
+			firstName: "empty",
+			lastName: "empty",
+			birthday: "empty",
+			recipes: []
 		})
         try {
             const response = await fetch(
@@ -33,7 +43,12 @@ export default function CreateUser(props) {
             console.log(data)
             setUserInfo({
 				username: "",
-				password: ""
+				password: "",
+				bio: "empty",
+				firstName: "empty",
+				lastName: "empty",
+				birthday: "empty",
+				recipes: []
 			});
         } catch (error) {
             console.error(error);

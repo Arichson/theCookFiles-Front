@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function IndividualRecipe(props) {
-	console.log(props);
+	// console.log(props);
 	const API_KEY = process.env.REACT_APP_SPOON_KEY;
 	// process.env.REACT_APP_SPOON_KEY;
 	const [recipe, setRecipe] = useState({

@@ -84,7 +84,7 @@ export default function Home(props) {
 	// }, [maxAmountOnPage]);
 	return (
 		<div className="HomePage">
-			<h1>This is the {props.page} page</h1>
+			<h1>Welcome {window.localStorage.username? window.localStorage.username : "guest"}</h1>
 			<p>Showing {amountShown} items</p> {/* FIX THIS PART */}
 			<span>
 				<button onClick={() => setMaxAmountOnPage(20)}>Show 20 items</button>
