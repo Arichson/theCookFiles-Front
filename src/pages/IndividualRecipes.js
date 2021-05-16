@@ -719,7 +719,45 @@ export default function IndividualRecipe(props) {
 					"Content-Type": "application/json"
 				},
 				///////create a body thats an object containing the information needed to put at the backend
-				body: JSON.stringify()
+				body: JSON.stringify({
+					id: recipe.id,
+					title: recipe.title,
+					image: recipe.image
+				})
+				}
+			);
+			const data = await response.json();
+			console.log(data)
+			await getRecipeIdFromCookFileApi(e)
+
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	const getRecipeIdFromCookFileApi = async (e) => {
+		e.preventDefault()
+		try {
+			const response = await fetch(`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`);
+			const data = await response.json();
+			
+			console.log(data);
+			const aipID = data.filter(recipes => recipes.id === theId)
+			setSavedApiID(aipID[0]._id)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
+	const addRecipeToUser = async (e) => {
+
+		try {
+			const response = await fetch(
+				`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes/${savedApiID}`,
+				{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				}
 				}
 			);
 			const data = await response.json();
@@ -731,42 +769,23 @@ export default function IndividualRecipe(props) {
 	}
 
 
-	// const addRecipeToUser = async (e) => {
-	// 	e.preventDefault();
 
-	// 	try {
-	// 		const response = await fetch(
-	// 			`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes/${theId}`,
-	// 			{
-	// 			method: "POST",
-	// 			headers: {
-	// 				"Content-Type": "application/json"
-	// 			}
-	// 			}
-	// 		);
-	// 		const data = await response.json();
-	// 		console.log(data)
-
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// }
-
-
-
-	// const fetchRecipe = async () => {
-	// 	try {
-	// 		const response = await fetch(url);
-	// 		const data = await response.json();
-	// 		setRecipe(data);
-	// 		console.log('Fetched');
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-	// useEffect(() => {
-	// 	fetchRecipe();
-	// }, [props]);
+	const fetchRecipe = async () => {
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
+			setRecipe(data);
+			console.log('Fetched');
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		fetchRecipe();
+	}, [props]);
+	useEffect(() => {
+		addRecipeToUser()
+	}, [savedApiID])
 
 	return (
 		<div className="IndividualRecipe">
@@ -784,7 +803,7 @@ export default function IndividualRecipe(props) {
 
 
 
-						<button >Add to list</button>
+						<button onClick={addRecipeToDatabase}>Add to list</button>
 
 
 
