@@ -701,9 +701,58 @@ export default function IndividualRecipe(props) {
 		spoonacularSourceUrl:
 			'https://spoonacular.com/cauliflower-brown-rice-and-vegetable-fried-rice-716426'
 	});
+	const [savedApiID, setSavedApiID] = useState("")
 	const theId = props.match.params.id;
 
 	const url = `https://api.spoonacular.com/recipes/${theId}/information?apiKey=${API_KEY}`;
+
+
+	const addRecipeToDatabase = async (e) => {
+		e.preventDefault();
+
+		try {
+			const response = await fetch(
+				`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`,
+				{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+				},
+				///////create a body thats an object containing the information needed to put at the backend
+				body: JSON.stringify()
+				}
+			);
+			const data = await response.json();
+			console.log(data)
+
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+
+	// const addRecipeToUser = async (e) => {
+	// 	e.preventDefault();
+
+	// 	try {
+	// 		const response = await fetch(
+	// 			`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes/${theId}`,
+	// 			{
+	// 			method: "POST",
+	// 			headers: {
+	// 				"Content-Type": "application/json"
+	// 			}
+	// 			}
+	// 		);
+	// 		const data = await response.json();
+	// 		console.log(data)
+
+	// 	} catch (error) {
+	// 		console.error(error);
+	// 	}
+	// }
+
+
 
 	// const fetchRecipe = async () => {
 	// 	try {
@@ -732,7 +781,14 @@ export default function IndividualRecipe(props) {
 				<div>
 					<span>
 						<img src={recipe.image} alt={recipe.title + ' picture'} />
-						<button>Add to list</button>
+
+
+
+						<button >Add to list</button>
+
+
+
+						
 					</span>
 				</div>
 				<h4>Summary</h4>
