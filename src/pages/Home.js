@@ -63,25 +63,24 @@ export default function Home(props) {
 	const [maxAmountOnPage, setMaxAmountOnPage] = useState(20);
 	const [amountShown, setAmountShown] = useState(1);
 	const API_KEY = process.env.REACT_APP_SPOON_KEY;
-	// process.env.REACT_APP_SPOON_KEY;
-	// const fetchAllData = async () => {
-	// 	try {
-	// 		const response = await fetch(
-	// 			`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=${maxAmountOnPage}`
-	// 		);
-	// 		const data = await response.json();
-	// 		setTesting(data);
-	// 		console.log('Fetched');
-	// 	} catch (error) {
-	// 		console.log(error);
-	// 	}
-	// };
-	// useEffect(() => {
-	// 	fetchAllData();
-	// }, []);
-	// useEffect(() => {
-	// 	fetchAllData();
-	// }, [maxAmountOnPage]);
+	const fetchAllData = async () => {
+		try {
+			const response = await fetch(
+				`https://api.spoonacular.com/recipes/complexSearch?apiKey=${API_KEY}&number=${maxAmountOnPage}`
+			);
+			const data = await response.json();
+			setTesting(data);
+			console.log('Fetched');
+		} catch (error) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		fetchAllData();
+	}, []);
+	useEffect(() => {
+		fetchAllData();
+	}, [maxAmountOnPage]);
 	return (
 		<div className="HomePage">
 			<h1>Welcome {window.localStorage.username? window.localStorage.username : "guest"}</h1>

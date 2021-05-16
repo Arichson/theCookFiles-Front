@@ -706,6 +706,21 @@ export default function IndividualRecipe(props) {
 
 	const url = `https://api.spoonacular.com/recipes/${theId}/information?apiKey=${API_KEY}`;
 
+	const checkRecipeIdFromCookFileApi = async (e) => {
+		e.preventDefault()
+		try {
+			const response = await fetch(`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`);
+			const data = await response.json();
+			
+			console.log(data);
+			const aipID = data.filter(recipes => recipes.id === theId)
+			console.log(aipID)
+			aipID[0] ? getRecipeIdFromCookFileApi(e) : addRecipeToDatabase(e)
+		} catch (error) {
+			console.log(error);
+		}
+	}
+
 
 	const addRecipeToDatabase = async (e) => {
 		e.preventDefault();
@@ -784,7 +799,10 @@ export default function IndividualRecipe(props) {
 		fetchRecipe();
 	}, [props]);
 	useEffect(() => {
-		addRecipeToUser()
+		if(savedApiID.split("").length > 0){
+			addRecipeToUser()
+
+		}
 	}, [savedApiID])
 
 	return (
@@ -803,7 +821,7 @@ export default function IndividualRecipe(props) {
 
 
 
-						<button onClick={addRecipeToDatabase}>Add to list</button>
+						<button onClick={checkRecipeIdFromCookFileApi}>Add to list</button>
 
 
 
