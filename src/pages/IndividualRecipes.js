@@ -795,6 +795,9 @@ export default function IndividualRecipe(props) {
 			console.log(error);
 		}
 	};
+
+	const normalText = /(<([^>]+)>)/ig;
+
 	useEffect(() => {
 		fetchRecipe();
 	}, [props]);
@@ -829,7 +832,7 @@ export default function IndividualRecipe(props) {
 					</span>
 				</div>
 				<h4>Summary</h4>
-				<p dangerouslySetInnerHTML={{ __html: recipe.summary }} />
+				<p>{recipe.summary.replace(normalText, "")}</p>
 				<ul>
 					{recipe.extendedIngredients.map((item, index) => {
 						return (

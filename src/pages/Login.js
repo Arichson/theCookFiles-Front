@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import {Datacontext} from "../App"
 
 export default function Login(props) {
@@ -20,7 +20,6 @@ export default function Login(props) {
 			const theUser = data.filter(users => users.username === loginForm.username)
 			console.log(theUser)
 			theUser[0] ? handleLogin(e) : setNotALoginAccount("The User Name or Password is incorrect.")
-			
 
 		} catch (error) {
 			console.error(error);
@@ -52,12 +51,10 @@ export default function Login(props) {
 		}
 	};
 
-
 	const handleLoginChange = (e) => {
 		setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
 		console.log(loginForm)
 	};
-
 
 	return (
 		<div className="Login">
