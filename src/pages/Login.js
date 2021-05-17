@@ -5,10 +5,27 @@ import {Datacontext} from "../App"
 export default function Login(props) {
 	const {isLoggedIn, setIsLoggedIn} = useContext(Datacontext)
 	const [showPW, setShowPW] = useState(false);
+	const [notALoginAccount, setNotALoginAccount] = useState("")
 	const [loginForm, setLoginForm] = useState({
 	  username: "",
 	  password: ""
 	});
+
+	const checkUser = async (e) => {
+		e.preventDefault();
+		try {
+			const response = await fetch("http://localhost:8000/users")
+			const data = await response.json();
+			console.log(data)
+			const theUser = data.filter(users => users.username === loginForm.username)
+			console.log(theUser)
+			theUser[0] ? handleLogin(e) : setNotALoginAccount("The User Name or Password is incorrect.")
+			
+
+		} catch (error) {
+			console.error(error);
+		}
+	}
 
 	const handleLogin = async (e) => {
 		e.preventDefault();
@@ -45,8 +62,11 @@ export default function Login(props) {
 	return (
 		<div className="Login">
 			<h1>This is the {props.page} page</h1>
-			<form onSubmit={handleLogin}>
+			<form onSubmit={checkUser}>
 				<h2>Login</h2>
+				<div>
+				{notALoginAccount}
+				</div>
 				<span>Username: </span>
 				<input
 					onChange={handleLoginChange}
