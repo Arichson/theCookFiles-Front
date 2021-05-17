@@ -62,7 +62,6 @@ export default function Home(props) {
 	});
 	const [maxAmountOnPage, setMaxAmountOnPage] = useState(20);
 	const [pageNumber, setPageNumber] = useState(0)
-	const [amountShown, setAmountShown] = useState(1);
 	const theOffset = maxAmountOnPage*pageNumber
 	const API_KEY = process.env.REACT_APP_SPOON_KEY;
 	const fetchAllData = async () => {
@@ -81,27 +80,26 @@ export default function Home(props) {
 	for(let i = 0; i < Math.ceil(1000/maxAmountOnPage); i++){
 		pagesArray.push(i)
 	}
-
-	useEffect(() => {
-		fetchAllData();
-	}, []);
-	useEffect(() => {
-		fetchAllData();
-	}, [maxAmountOnPage]);
-	useEffect(() => {
-		fetchAllData();
-	}, [pageNumber]);
+	// useEffect(() => {
+	// 	fetchAllData();
+	// }, []);
+	// useEffect(() => {
+	// 	fetchAllData();
+	// }, [maxAmountOnPage]);
+	// useEffect(() => {
+	// 	fetchAllData();
+	// }, [pageNumber]);
 
 	return (
 		<div className="HomePage">
 			<h1>Welcome {window.localStorage.username? window.localStorage.username : "guest"}</h1>
-			<p>Showing {amountShown} of {1000} items</p> {/* FIX THIS PART */}
+			<p>Showing {maxAmountOnPage} of {1000} items</p> {/* FIX THIS PART */}
 			<span>Page { pageNumber + 1 + " "}</span>
 			<ul>
 				{
 					pagesArray.map((number) => {
 						return (
-							<span key={number} onClick={()=>setPageNumber(number)}>Page {number + 1} </span>
+							<li key={number} onClick={()=>setPageNumber(number)}>Page {number + 1} </li>
 						)
 					})
 				}
@@ -121,7 +119,7 @@ export default function Home(props) {
 								to={'/' + recipe.id}
 								className="recipeLink"
 								style={{ backgroundImage: `url(${recipe.image})` }}
-								>
+							>
 								<p className="recipeName">{recipe.title}</p>
 							</Link>
 						</li>

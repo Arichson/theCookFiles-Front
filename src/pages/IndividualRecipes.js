@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 export default function IndividualRecipe(props) {
-	// console.log(props);
 	const API_KEY = process.env.REACT_APP_SPOON_KEY;
-	// process.env.REACT_APP_SPOON_KEY;
 	const [recipe, setRecipe] = useState({
 		vegetarian: true,
 		vegan: true,
@@ -720,8 +718,6 @@ export default function IndividualRecipe(props) {
 			console.log(error);
 		}
 	}
-
-
 	const addRecipeToDatabase = async (e) => {
 		e.preventDefault();
 
@@ -762,7 +758,6 @@ export default function IndividualRecipe(props) {
 			console.log(error);
 		}
 	}
-
 	const addRecipeToUser = async (e) => {
 
 		try {
@@ -782,9 +777,6 @@ export default function IndividualRecipe(props) {
 			console.error(error);
 		}
 	}
-
-
-
 	const fetchRecipe = async () => {
 		try {
 			const response = await fetch(url);
@@ -795,19 +787,17 @@ export default function IndividualRecipe(props) {
 			console.log(error);
 		}
 	};
-
 	const normalText = /(<([^>]+)>)/ig;
 
-	useEffect(() => {
-		fetchRecipe();
-	}, [props]);
+	// useEffect(() => {
+	// 	fetchRecipe();
+	// }, [props]);
 	useEffect(() => {
 		if(savedApiID.split("").length > 0){
 			addRecipeToUser()
 
 		}
 	}, [savedApiID])
-
 	return (
 		<div className="IndividualRecipe">
 			<div className="recipe">

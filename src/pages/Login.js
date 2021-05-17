@@ -1,14 +1,15 @@
-import React, { useState, useContext } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { useState, useContext} from 'react';
+import { Link, useHistory} from 'react-router-dom';
 import {Datacontext} from "../App"
 
 export default function Login(props) {
+	const history = useHistory();
 	const {isLoggedIn, setIsLoggedIn} = useContext(Datacontext)
 	const [showPW, setShowPW] = useState(false);
 	const [notALoginAccount, setNotALoginAccount] = useState("")
 	const [loginForm, setLoginForm] = useState({
-	  username: "",
-	  password: ""
+		username: "",
+		password: ""
 	});
 
 	const checkUser = async (e) => {
@@ -45,6 +46,7 @@ export default function Login(props) {
 			window.localStorage.setItem("id", data.id)
 			setIsLoggedIn(true);
 			console.log(window.localStorage)
+			history.push("/")
 			}
 		} catch (error) {
 			console.error(error);
