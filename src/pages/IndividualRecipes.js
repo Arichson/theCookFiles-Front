@@ -725,16 +725,16 @@ export default function IndividualRecipe(props) {
 			const response = await fetch(
 				`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`,
 				{
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json"
-				},
-				///////create a body thats an object containing the information needed to put at the backend
-				body: JSON.stringify({
-					id: recipe.id,
-					title: recipe.title,
-					image: recipe.image
-				})
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					},
+					///////create a body thats an object containing the information needed to put at the backend
+					body: JSON.stringify({
+						id: recipe.id,
+						title: recipe.title,
+						image: recipe.image
+					})
 				}
 			);
 			const data = await response.json();
@@ -799,34 +799,38 @@ export default function IndividualRecipe(props) {
 		}
 	}, [savedApiID])
 	return (
-		<div className="IndividualRecipe">
+		<div className="m-10">
 			<div className="recipe">
-				<h1>{recipe.title}</h1>
-				<div>
-					<h3>
-						Cooktime: <b>{recipe.readyInMinutes}</b>
-					</h3>
-					<h3>Serving</h3>
-				</div>
-				<div>
-					<span>
-						<img src={recipe.image} alt={recipe.title + ' picture'} />
-
-
-
-						<button onClick={checkRecipeIdFromCookFileApi}>Add to list</button>
-
-
-
-						
+				<h1 className="text-3xl text-center">{recipe.title}</h1>
+				<div className="flex justify-between w-full mt-4 mb-4 h-full">
+					<img className="w-6/12 border-2 border-black"src={recipe.image} alt={recipe.title + ' picture'} />
+					<span className="text-left w-4/12 flex flex-col justify-center text-center align-center content-center">
+						<h3 className="h-.5">
+							Cooktime: <b>{recipe.readyInMinutes}</b> minutes
+						</h3>
+						{
+							recipe.servings ? 
+								<h3 className="h-.5">Serving: <b>{recipe.servings}</b></h3>
+								:
+								""
+						}
+						<h3>Vegetarian: <b>{recipe.vegetarian ? "yes" : "no"}</b></h3> 
+						<h3>Vegan: <b>{recipe.vegan ? "yes" : "no"}</b></h3> 
+						<h3>Gluten Free: <b>{recipe.glutenFree ? "yes" : "no"}</b></h3>
+						<h3>Dairy Free: <b>{recipe. dairyFree ? "yes" : "no"}</b></h3>
 					</span>
+					<button className="h-.5 w-2/12 border-black " onClick={checkRecipeIdFromCookFileApi}>Add to list</button>
+			
 				</div>
-				<h4>Summary</h4>
-				<p>{recipe.summary.replace(normalText, "")}</p>
-				<ul>
+				<div className="border-2 border-black">
+					<h4 className="text-center ml-2 mr-2 mb-2 text-lg">Summary</h4>
+					<p className="ml-2 mr-2 mb-2">{recipe.summary.replace(normalText, "")}</p>
+				</div>
+				<ul className="mt-4 border-2 border-black mb-2">
+					<p className="text-center mb-4 ml-2 mr-2 text-lg">Ingredients</p>
 					{recipe.extendedIngredients.map((item, index) => {
 						return (
-							<li key={index}>
+							<li key={index} className="mb-2 ml-2 mr-2">
 								<p>
 									<span>
 										<b>{item.name + ': '}</b>
@@ -837,22 +841,25 @@ export default function IndividualRecipe(props) {
 						);
 					})}
 				</ul>
-				<h4>Steps</h4>
-				<ol>
-					{recipe.analyzedInstructions.map((item, index) => {
-						return item.steps.map((step, other) => {
-							return (
-								<li key={index + other}>
-									<p>{step.step}</p>
+				<div className="border-2 border-black">
+					<h4 className="text-center ml-2 mr-2 mb-2 text-lg">Steps</h4>
+					<ol>
+						{recipe.analyzedInstructions.map((item, index) => {
+							{return (
+								<li key={index}>
+									{item.steps.map((step, other) => {
+										return (
+												<p className="mb-2 ml-2 mr-2" key={other}><b>{other +1}.</b> {step.step}</p>
+										);
+									}
+									)}
 								</li>
-							);
-						});
-					})}
-				</ol>
-				<h2>Test</h2>
-				<p dangerouslySetInnerHTML={{ __html: recipe.instructions }} />
+							)
+							}
+						})}
+					</ol>
+				</div>
 			</div>
-			<></>
 		</div>
 	);
 }

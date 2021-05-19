@@ -50,7 +50,7 @@ export default function UserRecipes ({userInfo}) {
             {savedRecipes?
                 savedRecipes.length > 0?
 
-                <ul>
+                <ul className="flex flex-wrap justify-around items-stretch w-full h-full">
                 {savedRecipes.map((recipe, index) => {
                     return(
                         <EachUserRecipes key={index} userInfo={userInfo} recipe={recipe} setSavedRecipes={setSavedRecipes}/>

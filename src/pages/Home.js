@@ -92,35 +92,36 @@ export default function Home(props) {
 
 	return (
 		<div className="HomePage">
-			<h1>Welcome {window.localStorage.username? window.localStorage.username : "guest"}</h1>
-			<p>Showing {maxAmountOnPage} of {1000} items</p> {/* FIX THIS PART */}
-			<span>Page { pageNumber + 1 + " "}</span>
-			<ul>
+			<h1>Welcome <b>{window.localStorage.username? window.localStorage.username : "guest"} </b></h1>
+			
+
+			<ul className="flex flex-wrap justify-around items-stretch w-full">
 				{
 					pagesArray.map((number) => {
 						return (
-							<li key={number} onClick={()=>setPageNumber(number)}>Page {number + 1} </li>
+							<li className="w-20 text-center" key={number} onClick={()=>setPageNumber(number)}>Page {number + 1} </li>
 						)
 					})
 				}
 			</ul>
-			<span>
-				<button onClick={() => setMaxAmountOnPage(20)}>Show 20 items</button>
-				<button onClick={() => setMaxAmountOnPage(40)}>Show 40 items</button>
-				<button onClick={() => setMaxAmountOnPage(60)}>Show 60 items</button>
-				<button onClick={() => setMaxAmountOnPage(80)}>Show 80 items</button>
-				<button onClick={() => setMaxAmountOnPage(100)}>Show 100 items</button>
-			</span>
-			<div className="recipeContainer">
+			<div className="border-b-2 border-t-2 border-black">
+				<button className="border-2 border-black m-2 w-32 rounded" onClick={() => setMaxAmountOnPage(20)}>Show 20 items</button>
+				<button className="border-2 border-black m-2 w-32 rounded" onClick={() => setMaxAmountOnPage(40)}>Show 40 items</button>
+				<button className="border-2 border-black m-2 w-32 rounded" onClick={() => setMaxAmountOnPage(60)}>Show 60 items</button>
+				<button className="border-2 border-black m-2 w-32 rounded" onClick={() => setMaxAmountOnPage(80)}>Show 80 items</button>
+				<button className="border-2 border-black m-2 w-32 rounded" onClick={() => setMaxAmountOnPage(100)}>Show 100 items</button>
+				<p className="m-full text-center"><span>Page { pageNumber + 1 + " "}</span> | <span>Showing {maxAmountOnPage} of {1000} items</span></p>
+			</div>
+			<div className="flex flex-wrap justify-around items-stretch w-full h-full">
 				{testing.results.map((recipe, index) => {
 					return (
-						<li key={index} className="eachRecipe">
+						<li key={index} className="flex  flex-wrap justify-around items-stretch w-60 h-60 m-1">
 							<Link
 								to={'/' + recipe.id}
-								className="recipeLink"
+								className="w-60 h-60 bg-cover flex items-end bg-no-repeat border-black border-2 box-border rounded m-2"
 								style={{ backgroundImage: `url(${recipe.image})` }}
 							>
-								<p className="recipeName">{recipe.title}</p>
+								<p className="text-center flex items-center align-center w-full static bottom-0 bg-white bg-opacity-50 align-middle justify-center h-20 border-t-2 border-black">{recipe.title}</p>
 							</Link>
 						</li>
 					);
