@@ -204,7 +204,7 @@ export default function IndividualRecipe(props) {
 			<div className="recipe">
 				<h1 className="text-3xl text-center">{recipe.title}</h1>
 				<div className="flex justify-between w-full mt-4 mb-4 h-full">
-					<img className="w-6/12 border-2 border-black"src={recipe.image} alt={recipe.title + ' picture'} />
+					<img className="w-6/12 border-2 border-black rounded"src={recipe.image} alt={recipe.title + ' picture'} />
 					<span className="text-left w-4/12 flex flex-col justify-center text-center align-center content-center">
 						<h3 className="h-.5">
 							Cooktime: <b>{recipe.readyInMinutes}</b> minutes
@@ -220,14 +220,14 @@ export default function IndividualRecipe(props) {
 						<h3>Gluten Free: <b>{recipe.glutenFree ? "yes" : "no"}</b></h3>
 						<h3>Dairy Free: <b>{recipe. dairyFree ? "yes" : "no"}</b></h3>
 					</span>
-					<button className="h-.5 w-2/12 border-black " onClick={checkRecipeIdFromCookFileApi}>Add to list</button>
+					<div className="flex items-center justify-center w-2/12"><button className="h-10 w-24 rounded border-black border-2" onClick={checkRecipeIdFromCookFileApi}>Add to list</button></div>
 			
 				</div>
-				<div className="border-2 border-black">
+				<div className="border-2 border-black rounded">
 					<h4 className="text-center ml-2 mr-2 mb-2 text-lg">Summary</h4>
 					<p className="ml-2 mr-2 mb-2">{recipe.summary.replace(normalText, "")}</p>
 				</div>
-				<ul className="mt-4 border-2 border-black mb-2">
+				<ul className="mt-4 border-2 border-black mb-2 rounded">
 					<p className="text-center mb-4 ml-2 mr-2 text-lg">Ingredients</p>
 					{recipe.extendedIngredients.map((item, index) => {
 						return (
@@ -243,7 +243,7 @@ export default function IndividualRecipe(props) {
 					})}
 				</ul>
 				{recipe.analyzedInstructions[0] ?
-				<div className="border-2 border-black">
+				<div className="border-2 border-black rounded">
 					<h4 className="text-center ml-2 mr-2 mb-2 text-lg">Steps</h4>
 					<ol>
 						{recipe.analyzedInstructions.map((item, index) => {
