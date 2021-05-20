@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react"
-
+import { useEffect, useState, useContext } from "react"
+import {useHistory} from "react-router-dom"
+import {Datacontext} from "../App"
 
 
 export default function UsersInformations ({userInfo}){
-
+    const {isLoggedIn, setIsLoggedIn} = useContext(Datacontext)
     const [information, setInformation] = useState(null)
     const [editInfo, setEditInfo] = useState(false)
+    const history = useHistory()
 
     const deleteUser = async (e) => {
         try {
             const response = await fetch(
-            `http://localhost:8000/users/${information._id}`,
+            `https://the-cook-files-api.herokuapp.com/users/${information._id}`,
             {
                 method: "DELETE",
                 headers: {
@@ -20,6 +22,9 @@ export default function UsersInformations ({userInfo}){
             }
             );
             const data = await response.json();
+            setIsLoggedIn(false)
+            window.localStorage.clear()
+            history.push("/")
             console.log(data)
         } catch(err) {
             console.log(err)
@@ -29,7 +34,7 @@ export default function UsersInformations ({userInfo}){
         // e.preventDefault();
 
         try{
-            const res = await fetch(`http://localhost:8000/users/${information._id}`,
+            const res = await fetch(`https://the-cook-files-api.herokuapp.com/users/${information._id}`,
                 {
                     method: "PUT",
                     headers: {

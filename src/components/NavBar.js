@@ -12,7 +12,7 @@ const NavBar = props => {
 		console.log(window.localStorage)
 	};
 	return (
-		<nav className="flex justify-around bg-gray-500">
+		<nav className="flex justify-around bg-gray-500 p-3">
 			{props.routes.map(({ key, path }) => {
 				return key !== 'Login' ? (
 					<Link className="hover:text-green-500" key={key} to={path}>

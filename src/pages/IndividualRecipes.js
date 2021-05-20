@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import {Datacontext} from "../App"
 
 export default function IndividualRecipe(props) {
 	const API_KEY = process.env.REACT_APP_SPOON_KEY;
+    const {isLoggedIn, setIsLoggedIn} = useContext(Datacontext)
 	const [recipe, setRecipe] = useState({
 		vegetarian: "",
 		vegan: "",
@@ -12,7 +14,7 @@ export default function IndividualRecipe(props) {
 			{
 				id: "",
 				aisle: '',
-				image: 'broccoli.',
+				image: '',
 				consistency: '',
 				name: '',
 				nameClean: '',
@@ -38,7 +40,7 @@ export default function IndividualRecipe(props) {
 			}
 		],
 		id: "",
-		title: 'Cauliflower, Brown Rice, and Vegetable Fried Rice',
+		title: '',
 		readyInMinutes: "",
 		servings: "",
 		image: '',
@@ -108,7 +110,7 @@ export default function IndividualRecipe(props) {
 	const checkRecipeIdFromCookFileApi = async (e) => {
 		e.preventDefault()
 		try {
-			const response = await fetch(`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`);
+			const response = await fetch(`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes`);
 			const data = await response.json();
 			
 			console.log(data);
@@ -124,7 +126,7 @@ export default function IndividualRecipe(props) {
 
 		try {
 			const response = await fetch(
-				`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`,
+				`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes`,
 				{
 					method: "POST",
 					headers: {
@@ -149,7 +151,7 @@ export default function IndividualRecipe(props) {
 	const getRecipeIdFromCookFileApi = async (e) => {
 		e.preventDefault()
 		try {
-			const response = await fetch(`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`);
+			const response = await fetch(`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes`);
 			const data = await response.json();
 			
 			console.log(data);
@@ -163,7 +165,7 @@ export default function IndividualRecipe(props) {
 
 		try {
 			const response = await fetch(
-				`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes/${savedApiID}`,
+				`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes/${savedApiID}`,
 				{
 				method: "POST",
 				headers: {
@@ -190,9 +192,9 @@ export default function IndividualRecipe(props) {
 	};
 	const normalText = /(<([^>]+)>)/ig;
 
-	useEffect(() => {
-		fetchRecipe();
-	}, [props]);
+	// useEffect(() => {
+	// 	fetchRecipe();
+	// }, [props]);
 	useEffect(() => {
 		if(savedApiID.split("").length > 0){
 			addRecipeToUser()
@@ -204,7 +206,7 @@ export default function IndividualRecipe(props) {
 			<div className="recipe">
 				<h1 className="text-3xl text-center">{recipe.title}</h1>
 				<div className="flex justify-between w-full mt-4 mb-4 h-full">
-					<img className="w-6/12 border-2 border-black"src={recipe.image} alt={recipe.title + ' picture'} />
+					<img className="w-6/12 border-2 border-black rounded"src={recipe.image} alt={recipe.title + ' picture'} />
 					<span className="text-left w-4/12 flex flex-col justify-center text-center align-center content-center">
 						<h3 className="h-.5">
 							Cooktime: <b>{recipe.readyInMinutes}</b> minutes
@@ -220,14 +222,17 @@ export default function IndividualRecipe(props) {
 						<h3>Gluten Free: <b>{recipe.glutenFree ? "yes" : "no"}</b></h3>
 						<h3>Dairy Free: <b>{recipe. dairyFree ? "yes" : "no"}</b></h3>
 					</span>
-					<button className="h-.5 w-2/12 border-black " onClick={checkRecipeIdFromCookFileApi}>Add to list</button>
+					{isLoggedIn ?
+					<div className="flex items-center justify-center w-2/12"><button className="h-10 w-24 rounded border-black border-2" onClick={checkRecipeIdFromCookFileApi}>Add to list</button></div> 
+					: ""
+					}
 			
 				</div>
-				<div className="border-2 border-black">
+				<div className="border-2 border-black rounded">
 					<h4 className="text-center ml-2 mr-2 mb-2 text-lg">Summary</h4>
 					<p className="ml-2 mr-2 mb-2">{recipe.summary.replace(normalText, "")}</p>
 				</div>
-				<ul className="mt-4 border-2 border-black mb-2">
+				<ul className="mt-4 border-2 border-black mb-2 rounded">
 					<p className="text-center mb-4 ml-2 mr-2 text-lg">Ingredients</p>
 					{recipe.extendedIngredients.map((item, index) => {
 						return (
@@ -242,7 +247,8 @@ export default function IndividualRecipe(props) {
 						);
 					})}
 				</ul>
-				<div className="border-2 border-black">
+				{recipe.analyzedInstructions[0] ?
+				<div className="border-2 border-black rounded">
 					<h4 className="text-center ml-2 mr-2 mb-2 text-lg">Steps</h4>
 					<ol>
 						{recipe.analyzedInstructions.map((item, index) => {
@@ -250,16 +256,19 @@ export default function IndividualRecipe(props) {
 								<li key={index}>
 									{item.steps.map((step, other) => {
 										return (
-												<p className="mb-2 ml-2 mr-2" key={other}><b>{other +1}.</b> {step.step}</p>
-										);
-									}
-									)}
+											<p className="mb-2 ml-2 mr-2" key={other}><b>{other +1}.</b> {step.step}</p>
+											);
+										}
+										)}
 								</li>
 							)
-							}
-						})}
+						}
+					})}
 					</ol>
 				</div>
+					:
+					""
+				}
 			</div>
 		</div>
 	);

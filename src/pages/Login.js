@@ -15,7 +15,7 @@ export default function Login(props) {
 	const checkUser = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch("http://localhost:8000/users")
+			const response = await fetch("https://the-cook-files-api.herokuapp.com/users")
 			const data = await response.json();
 			console.log(data)
 			const theUser = data.filter(users => users.username === loginForm.username)
@@ -30,7 +30,7 @@ export default function Login(props) {
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch("http://localhost:8000/login", {
+			const response = await fetch("https://the-cook-files-api.herokuapp.com/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -59,10 +59,9 @@ export default function Login(props) {
 	};
 
 	return (
-		<div className="Login">
-			<h1>This is the {props.page} page</h1>
+		<div className="border-black border-2 fixed bg-gray-400 m-20 p-5 rounded">
 			<form onSubmit={checkUser}>
-				<h2>Login</h2>
+				<h1>Login</h1>
 				<div>
 				{notALoginAccount}
 				</div>
@@ -72,6 +71,7 @@ export default function Login(props) {
 					type="text"
 					placeholder="username"
 					name="username"
+					className="border-blue border-2 p-1 rounded m-1"
 				/>
 				<br />
 				<span>Password: </span>
@@ -80,13 +80,14 @@ export default function Login(props) {
 					type={showPW ? 'text' : 'password'}
 					placeholder="password"
 					name="password"
+					className="border-blue border-2 p-1 rounded m-1"
 				/>
-				<p onClick={() => setShowPW(!showPW)}>Show Password</p>
+				<p className="border-black border-2 rounded w-32 text-center m-2 inline bg-gray-100 p-1 cursor-pointer" onClick={() => setShowPW(!showPW)}>Show Password</p>
 				<br />
-				<input type="submit" />
+				<input className="border-black border-2 rounded w-20 text-center m-2 cursor-pointer" type="submit" />
 			</form>
 			<p>Don't have an account? </p>
-			<Link to="/createUser">Create new user?</Link>
+			<Link to="/createUser" className="border-black border-2 rounded w-32 text-center inline bg-gray-100 p-1 cursor-pointer">Create new user?</Link>
 		</div>
 	);
 }

@@ -1,9 +1,9 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import CreateUser from './pages/CreateUser';
 import IndividualRecipe from './pages/IndividualRecipes';
-import About from './pages/About';
+// import About from './pages/About';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import UsersPage from './pages/UsersPage';
@@ -21,7 +21,7 @@ export const Datacontext = React.createContext();
 const routes = [
 	{
 		Component: Home,
-		key: 'Home',
+		key: 'The Cook Files',
 		path: '/'
 	},
 	{
@@ -29,11 +29,11 @@ const routes = [
 		key: 'Contact',
 		path: '/contact'
 	},
-	{
-		Component: About,
-		key: 'About',
-		path: '/about'
-	},
+	// {
+	// 	Component: About,
+	// 	key: 'About',
+	// 	path: '/about'
+	// },
 	{
 		Component: UsersPage,
 		key: 'UsersPage',
