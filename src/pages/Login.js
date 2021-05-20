@@ -15,7 +15,7 @@ export default function Login(props) {
 	const checkUser = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch("http://localhost:8000/users")
+			const response = await fetch("https://the-cook-files-api.herokuapp.com/users")
 			const data = await response.json();
 			console.log(data)
 			const theUser = data.filter(users => users.username === loginForm.username)
@@ -30,7 +30,7 @@ export default function Login(props) {
 	const handleLogin = async (e) => {
 		e.preventDefault();
 		try {
-			const response = await fetch("http://localhost:8000/login", {
+			const response = await fetch("https://the-cook-files-api.herokuapp.com/login", {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

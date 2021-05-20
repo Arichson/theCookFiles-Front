@@ -14,7 +14,7 @@ export default function IndividualRecipe(props) {
 			{
 				id: "",
 				aisle: '',
-				image: 'broccoli.',
+				image: '',
 				consistency: '',
 				name: '',
 				nameClean: '',
@@ -40,7 +40,7 @@ export default function IndividualRecipe(props) {
 			}
 		],
 		id: "",
-		title: 'Cauliflower, Brown Rice, and Vegetable Fried Rice',
+		title: '',
 		readyInMinutes: "",
 		servings: "",
 		image: '',
@@ -110,7 +110,7 @@ export default function IndividualRecipe(props) {
 	const checkRecipeIdFromCookFileApi = async (e) => {
 		e.preventDefault()
 		try {
-			const response = await fetch(`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`);
+			const response = await fetch(`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes`);
 			const data = await response.json();
 			
 			console.log(data);
@@ -126,7 +126,7 @@ export default function IndividualRecipe(props) {
 
 		try {
 			const response = await fetch(
-				`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`,
+				`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes`,
 				{
 					method: "POST",
 					headers: {
@@ -151,7 +151,7 @@ export default function IndividualRecipe(props) {
 	const getRecipeIdFromCookFileApi = async (e) => {
 		e.preventDefault()
 		try {
-			const response = await fetch(`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes`);
+			const response = await fetch(`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes`);
 			const data = await response.json();
 			
 			console.log(data);
@@ -165,7 +165,7 @@ export default function IndividualRecipe(props) {
 
 		try {
 			const response = await fetch(
-				`http://localhost:8000/users/${window.localStorage.getItem("username")}/recipes/${savedApiID}`,
+				`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem("username")}/recipes/${savedApiID}`,
 				{
 				method: "POST",
 				headers: {
@@ -192,9 +192,9 @@ export default function IndividualRecipe(props) {
 	};
 	const normalText = /(<([^>]+)>)/ig;
 
-	useEffect(() => {
-		fetchRecipe();
-	}, [props]);
+	// useEffect(() => {
+	// 	fetchRecipe();
+	// }, [props]);
 	useEffect(() => {
 		if(savedApiID.split("").length > 0){
 			addRecipeToUser()

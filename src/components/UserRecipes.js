@@ -10,39 +10,11 @@ export default function UserRecipes ({userInfo}) {
         title: "Cauliflower, Brown Rice, and Vegetable Fried Rice",
         _id: "609c64f55b306922352a6b0c"
     }])
-    /*
-    const getYourData = async () => {
-		try {
-			const response = await fetch(
-			`http://localhost:8000/users/${window.localStorage.getItem(
-				"username"
-			)}/recipes`,
-			{
-				method: "GET",
-				headers: {
-				"Content-Type": "application/json",
-				// Authorization: "Bearer " + localStorage.getItem("token")
-				}
-			}
-			);
-			const data = await response.json();
-            setSavedRecipes(data)
-            // console.log(data)
-			// setTheUserName(window.localStorage.getItem("username"))
-			// setUserData(data)
-			// console.log(window.localStorage)
-            // console.log(savedRecipes)
-		} catch(err) {
-			console.log(err)
-		}
-	}
-*/
+
     useEffect(()=> {
-        // setSavedRecipes(userInfo.recipes)
-        // getYourData()
+
         setSavedRecipes(userInfo.recipes)
-        // console.log(savedRecipes)
-        // console.log(userInfo.recipes)
+
     }, [userInfo])
 
     return (

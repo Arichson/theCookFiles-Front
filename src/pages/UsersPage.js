@@ -12,7 +12,7 @@ export default function UsersPage () {
 	const getYourData = async () => {
 		try {
 			const response = await fetch(
-			`http://localhost:8000/users/${window.localStorage.getItem(
+			`https://the-cook-files-api.herokuapp.com/users/${window.localStorage.getItem(
 				"username"
 			)}`,
 			{

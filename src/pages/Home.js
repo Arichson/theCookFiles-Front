@@ -40,15 +40,15 @@ export default function Home(props) {
 			})
 		)
 	}
-	useEffect(() => {
-		fetchAllData();
-	}, []);
-	useEffect(() => {
-		fetchAllData();
-	}, [maxAmountOnPage]);
-	useEffect(() => {
-		fetchAllData();
-	}, [pageNumber]);
+	// useEffect(() => {
+	// 	fetchAllData();
+	// }, []);
+	// useEffect(() => {
+	// 	fetchAllData();
+	// }, [maxAmountOnPage]);
+	// useEffect(() => {
+	// 	fetchAllData();
+	// }, [pageNumber]);
 
 	return (
 		<div className="HomePage">

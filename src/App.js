@@ -1,9 +1,9 @@
 import './App.css';
 import NavBar from './components/NavBar';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import CreateUser from './pages/CreateUser';
 import IndividualRecipe from './pages/IndividualRecipes';
-import About from './pages/About';
+// import About from './pages/About';
 import Home from './pages/Home';
 import Contact from './pages/Contact';
 import UsersPage from './pages/UsersPage';
@@ -78,7 +78,6 @@ export default function App () {
 						}}
 					/>
 				</Switch>
-				<NavBar routes={routes} />
 			</Router>
 		</Datacontext.Provider>
 

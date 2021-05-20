@@ -23,7 +23,7 @@ export default function EachUserRecipes ({recipe, userInfo, setSavedRecipes}) {
         const editedUserData = {...theUsersData, recipes: newRecipeList}
         console.log(editedUserData)
         try{
-            const res = await fetch(`http://localhost:8000/users/${theUsersData._id}`,
+            const res = await fetch(`https://the-cook-files-api.herokuapp.com/users/${theUsersData._id}`,
                 {
                     method: "PUT",
                     headers: {

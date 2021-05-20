@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import {useHistory} from "react-router-dom"
 
 export default function CreateUser(props) {
+	const history = useHistory();
 	const [showPW, setShowPW] = useState(false);
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
@@ -20,7 +22,7 @@ export default function CreateUser(props) {
         e.preventDefault();
         try {
             const response = await fetch(
-                `http://localhost:8000/register`,
+                `https://the-cook-files-api.herokuapp.com/register`,
                 {
                 method: "POST",
                 headers: {
@@ -41,6 +43,7 @@ export default function CreateUser(props) {
 				birthday: "empty",
 				recipes: []
 			});
+			history.push("/login")
         } catch (error) {
             console.error(error);
         }
