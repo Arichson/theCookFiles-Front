@@ -21,7 +21,7 @@ export const Datacontext = React.createContext();
 const routes = [
 	{
 		Component: Home,
-		key: 'Home',
+		key: 'The Cook Files',
 		path: '/'
 	},
 	{
@@ -78,6 +78,7 @@ export default function App () {
 						}}
 					/>
 				</Switch>
+				<NavBar routes={routes} />
 			</Router>
 		</Datacontext.Provider>
 

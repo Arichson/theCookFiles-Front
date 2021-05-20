@@ -31,6 +31,15 @@ export default function Home(props) {
 	for(let i = 0; i < Math.ceil(1000/maxAmountOnPage); i++){
 		pagesArray.push(i)
 	}
+	const mappingOfPagesArray = () => {
+		return (
+			pagesArray.map((number) => {
+				return (
+					<li className="w-20 text-center cursor-pointer" key={number} onClick={()=>setPageNumber(number)}>Page {number + 1} </li>
+				)
+			})
+		)
+	}
 	useEffect(() => {
 		fetchAllData();
 	}, []);
@@ -43,16 +52,12 @@ export default function Home(props) {
 
 	return (
 		<div className="HomePage">
-			<h1>Welcome <b>{window.localStorage.username? window.localStorage.username : "guest"} </b></h1>
+			<h1 className="ml-5 text-xl">Welcome <b>{window.localStorage.username? window.localStorage.username : "guest"} </b></h1>
 			
 
 			<ul className="flex flex-wrap justify-around items-stretch w-full">
 				{
-					pagesArray.map((number) => {
-						return (
-							<li className="w-20 text-center" key={number} onClick={()=>setPageNumber(number)}>Page {number + 1} </li>
-						)
-					})
+					mappingOfPagesArray()
 				}
 			</ul>
 			<div className="border-b-2 border-t-2 border-black">
@@ -63,7 +68,7 @@ export default function Home(props) {
 				<button className="border-2 border-black m-2 w-32 rounded" onClick={() => setMaxAmountOnPage(100)}>Show 100 items</button>
 				<p className="m-full text-center"><span>Page { pageNumber + 1 + " "}</span> | <span>Showing {maxAmountOnPage} of {1000} items</span></p>
 			</div>
-			<div className="flex flex-wrap justify-around items-stretch w-full h-full">
+			<div className="flex flex-wrap justify-around items-stretch w-full h-full mb-10">
 				{testing.results.map((recipe, index) => {
 					return (
 						<li key={index} className="flex  flex-wrap justify-around items-stretch w-60 h-60 m-1">
@@ -78,6 +83,11 @@ export default function Home(props) {
 					);
 				})}
 			</div>
+			<ul className="flex flex-wrap justify-around items-stretch w-full">
+				{
+					mappingOfPagesArray()
+				}
+			</ul>
 		</div>
 	);
 }
