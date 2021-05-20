@@ -6,58 +6,9 @@ export default function Home(props) {
 		results: [
 			{
 				id: 716426,
-				title: 'Cauliflower, Brown Rice, and Vegetable Fried Rice',
-				image: 'https://spoonacular.com/recipeImages/716426-312x231.jpg',
-				imageType: 'jpg'
+				title: '',
+				image: '',
 			},
-			{
-				id: 715594,
-				title: 'Homemade Garlic and Basil French Fries',
-				image: 'https://spoonacular.com/recipeImages/715594-312x231.jpg',
-				imageType: 'jpg'
-			},
-			{
-				id: 715497,
-				title: 'Berry Banana Breakfast Smoothie',
-				image: 'https://spoonacular.com/recipeImages/715497-312x231.jpg',
-				imageType: 'jpg'
-			},
-			{
-				id: 644387,
-				title: 'Garlicky Kale',
-				image: 'https://spoonacular.com/recipeImages/644387-312x231.jpg',
-				imageType: 'jpg'
-			},
-			{
-				id: 715497,
-				title: 'Berry Banana Breakfast Smoothie',
-				image: 'https://spoonacular.com/recipeImages/715497-312x231.jpg',
-				imageType: 'jpg'
-			},
-			{
-				id: 644387,
-				title: 'Garlicky Kale',
-				image: 'https://spoonacular.com/recipeImages/644387-312x231.jpg',
-				imageType: 'jpg'
-			},
-			{
-				id: 715497,
-				title: 'Berry Banana Breakfast Smoothie',
-				image: 'https://spoonacular.com/recipeImages/715497-312x231.jpg',
-				imageType: 'jpg'
-			},
-			{
-				id: 644387,
-				title: 'Garlicky Kale',
-				image: 'https://spoonacular.com/recipeImages/644387-312x231.jpg',
-				imageType: 'jpg'
-			},
-			{
-				id: 715392,
-				title: 'Chicken Tortilla Soup (Slow Cooker)',
-				image: 'https://spoonacular.com/recipeImages/715392-312x231.jpg',
-				imageType: 'jpg'
-			}
 		]
 	});
 	const [maxAmountOnPage, setMaxAmountOnPage] = useState(20);
@@ -80,15 +31,15 @@ export default function Home(props) {
 	for(let i = 0; i < Math.ceil(1000/maxAmountOnPage); i++){
 		pagesArray.push(i)
 	}
-	// useEffect(() => {
-	// 	fetchAllData();
-	// }, []);
-	// useEffect(() => {
-	// 	fetchAllData();
-	// }, [maxAmountOnPage]);
-	// useEffect(() => {
-	// 	fetchAllData();
-	// }, [pageNumber]);
+	useEffect(() => {
+		fetchAllData();
+	}, []);
+	useEffect(() => {
+		fetchAllData();
+	}, [maxAmountOnPage]);
+	useEffect(() => {
+		fetchAllData();
+	}, [pageNumber]);
 
 	return (
 		<div className="HomePage">
