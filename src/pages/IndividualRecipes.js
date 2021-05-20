@@ -192,9 +192,9 @@ export default function IndividualRecipe(props) {
 	};
 	const normalText = /(<([^>]+)>)/ig;
 
-	// useEffect(() => {
-	// 	fetchRecipe();
-	// }, [props]);
+	useEffect(() => {
+		fetchRecipe();
+	}, [props]);
 	useEffect(() => {
 		if(savedApiID.split("").length > 0){
 			addRecipeToUser()
