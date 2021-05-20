@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import {Datacontext} from "../App"
 
 export default function IndividualRecipe(props) {
 	const API_KEY = process.env.REACT_APP_SPOON_KEY;
+    const {isLoggedIn, setIsLoggedIn} = useContext(Datacontext)
 	const [recipe, setRecipe] = useState({
 		vegetarian: "",
 		vegan: "",
@@ -220,7 +222,10 @@ export default function IndividualRecipe(props) {
 						<h3>Gluten Free: <b>{recipe.glutenFree ? "yes" : "no"}</b></h3>
 						<h3>Dairy Free: <b>{recipe. dairyFree ? "yes" : "no"}</b></h3>
 					</span>
-					<div className="flex items-center justify-center w-2/12"><button className="h-10 w-24 rounded border-black border-2" onClick={checkRecipeIdFromCookFileApi}>Add to list</button></div>
+					{isLoggedIn ?
+					<div className="flex items-center justify-center w-2/12"><button className="h-10 w-24 rounded border-black border-2" onClick={checkRecipeIdFromCookFileApi}>Add to list</button></div> 
+					: ""
+					}
 			
 				</div>
 				<div className="border-2 border-black rounded">

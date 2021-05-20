@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 export default function CreateUser(props) {
 	const [showPW, setShowPW] = useState(false);
@@ -18,15 +18,6 @@ export default function CreateUser(props) {
 
 	const createNewUser = async (e) => {
         e.preventDefault();
-		setUserInfo({
-			username: username,
-    		password: password,
-			bio: "empty",
-			firstName: "empty",
-			lastName: "empty",
-			birthday: "empty",
-			recipes: []
-		})
         try {
             const response = await fetch(
                 `http://localhost:8000/register`,
@@ -41,7 +32,7 @@ export default function CreateUser(props) {
             const data = await response.json();
             console.log(userInfo)
             console.log(data)
-            setUserInfo({
+            await setUserInfo({
 				username: "",
 				password: "",
 				bio: "empty",
@@ -54,9 +45,30 @@ export default function CreateUser(props) {
             console.error(error);
         }
     }
-	const handleChange = () => {
-
-	}
+	useEffect(() =>{
+		setUserInfo({
+			username: username,
+    		password: password,
+			bio: "empty",
+			firstName: "empty",
+			lastName: "empty",
+			birthday: "empty",
+			recipes: []
+		})
+		console.log(userInfo)
+	},[username])
+	useEffect(() =>{
+		setUserInfo({
+			username: username,
+    		password: password,
+			bio: "empty",
+			firstName: "empty",
+			lastName: "empty",
+			birthday: "empty",
+			recipes: []
+		})
+		console.log(userInfo)
+	},[password])
 
 	return (
 		<div className="border-black border-2 fixed bg-gray-400 m-20 p-5 rounded">
