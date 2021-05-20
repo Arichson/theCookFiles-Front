@@ -242,6 +242,7 @@ export default function IndividualRecipe(props) {
 						);
 					})}
 				</ul>
+				{recipe.analyzedInstructions[0] ?
 				<div className="border-2 border-black">
 					<h4 className="text-center ml-2 mr-2 mb-2 text-lg">Steps</h4>
 					<ol>
@@ -250,16 +251,19 @@ export default function IndividualRecipe(props) {
 								<li key={index}>
 									{item.steps.map((step, other) => {
 										return (
-												<p className="mb-2 ml-2 mr-2" key={other}><b>{other +1}.</b> {step.step}</p>
-										);
-									}
-									)}
+											<p className="mb-2 ml-2 mr-2" key={other}><b>{other +1}.</b> {step.step}</p>
+											);
+										}
+										)}
 								</li>
 							)
-							}
-						})}
+						}
+					})}
 					</ol>
 				</div>
+					:
+					""
+				}
 			</div>
 		</div>
 	);
