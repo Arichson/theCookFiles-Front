@@ -53,16 +53,16 @@ export default function EachUserRecipes ({recipe, userInfo, setSavedRecipes}) {
     return(
         <li className="eachRecipe">
 
+            <button className="w-6 h-6 border-black border-2 flex items-center justify-center absolute bg-gray-100 rounded hover:bg-red-300" onClick={(e) => {deleteARecipe(e, recipe._id)}} >X</button>
                 <Link
                     to={'/' + theRecipe.id}
-                    className="theRecipeLink"
+                    className="w-60 h-60 bg-cover flex items-end bg-no-repeat border-black border-2 box-border m-2 rounded"
                     style={{ backgroundImage: `url(${theRecipe.image})` }}
                     >
-                    <p className="recipeName">{theRecipe.title}</p>
+                    <p className="text-center flex items-center align-center w-full static bottom-0 bg-white bg-opacity-50 align-middle justify-center h-20 border-t-2 border-black">{theRecipe.title}</p>
                 </Link>
 
             
-                <button onClick={(e) => {deleteARecipe(e, recipe._id)}} >Delete</button>
           
         </li>
     )

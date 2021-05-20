@@ -12,10 +12,10 @@ const NavBar = props => {
 		console.log(window.localStorage)
 	};
 	return (
-		<nav className="NavBar">
+		<nav className="flex justify-around bg-gray-500">
 			{props.routes.map(({ key, path }) => {
 				return key !== 'Login' ? (
-					<Link key={key} to={path}>
+					<Link className="hover:text-green-500" key={key} to={path}>
 						{key}
 					</Link>
 				) : (
@@ -25,11 +25,12 @@ const NavBar = props => {
 			{isLoggedIn ? (
 				<button
 					onClick={handleLogout}
+					className="hover:text-green-500"
 				>
 					LogOut
 				</button>
 			) : (
-				<Link to={'/login'}>Login</Link>
+				<Link className="hover:text-green-500" to={'/login'}>Login</Link>
 			)}
 		</nav>
 	);

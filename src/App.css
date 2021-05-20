@@ -39,20 +39,3 @@
 
 
 /* below this is what i added */
-
-.eachRecipe{ 
-  display: flex;
-  color: red;
-}
-
-.theRecipeLink {
-  width: 200px;
-  height: 200px;
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-.recipeContainer{
-  display: flex;
-  flex-wrap: wrap;
-}
